@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+        testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
+        testApplicationId globalConfiguration.getAt("testApplicationId")
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        debug.java.srcDirs += 'src/debug/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        main.res.srcDirs =
+                [
+                        'src/main/res',
+                        'src/main/res/layouts/fragment',
+                        'src/main/res/layouts/activity',
+                        'src/main/res/layouts/item',
+                        'src/main/res/layouts/view'
+                ]
+
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+}
+
+afterEvaluate {
+    android.sourceSets.all { sourceSet ->
+        if (!sourceSet.name.startsWith('test') || !sourceSet.name.startsWith('androidTest')) {
+            sourceSet.kotlin.setSrcDirs([])
+        }
+    }
+}
+
+dependencies {
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+    def presentationAndroidTestDependencies = rootProject.ext.presentationAndroidTestDependencies
+
+    compile project(':domain')
+    compile project(':data')
+
+    compile presentationDependencies.appcomapt_v7
+    compile presentationDependencies.kotlin
+    compile presentationDependencies.butterKnife
+    compile presentationDependencies.dagger
+    compile presentationDependencies.rxAndroid
+    compile presentationDependencies.barcodeScanner
+    compile presentationDependencies.constranintLayout
+
+    testCompile presentationTestDependencies.jUnit
+    testCompile presentationTestDependencies.kotlin
+    testCompile presentationTestDependencies.kotlinTest
+    testCompile presentationTestDependencies.mockitoKotlin
+    testCompile presentationTestDependencies.kluent
+
+    androidTestCompile presentationAndroidTestDependencies.espresso
+    androidTestCompile presentationAndroidTestDependencies.runner
+    androidTestCompile presentationAndroidTestDependencies.rules
+    androidTestCompile presentationAndroidTestDependencies.espressoIntents
+    androidTestCompile presentationAndroidTestDependencies.annotations
+
+    provided presentationDependencies.javaxAnnotation
+
+    kapt presentationDependencies.kaptButterKnife
+    kapt presentationDependencies.kaptDagger
+
+    //Development
+    //compile developmentDependencies.leakCanary
+
+    compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+repositories {
+    mavenCentral()
+}
+kapt {
+    generateStubs = true
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Data</string>
+    <string name="error_500">Error interno del servidor</string>
+    <string name="error_404">Recurso no encontrado</string>
+    <string name="time_out">Tiempo de espera agotado</string>
+</resources>

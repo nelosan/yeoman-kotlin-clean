@@ -1,0 +1,29 @@
+{
+  "name": "generator-android-kotlin-clean",
+  "version": "1.0.0",
+  "description": "Yeoman generator for the Android Clean Architecture with kotlin.",
+  "homepage": "https://github.com/tomymolina/generator-android-clean-architecture",
+  "author": {
+    "name": "Nelo Sánchez Gomis",
+    "email": "nelosan@gmail.com"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "Android",
+    "Kotlin",
+    "Architecture",
+    "Clean",
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "yeoman-generator": "^1.0.0",
+    "yosay": "^1.2.1"
+  },
+  "repository": "nelosan/generator-android-kotlin-clean",
+  "scripts": {},
+  "license": "Apache-2.0"
+}

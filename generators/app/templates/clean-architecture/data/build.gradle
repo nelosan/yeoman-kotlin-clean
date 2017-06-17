@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+
+}
+
+dependencies {
+    def dataDependencies = rootProject.ext.dataDependencies
+    def dataTestDependencies = rootProject.ext.dataTestDependencies
+
+    compile project(":domain")
+
+    compile dataDependencies.kotlin
+    compile dataDependencies.rxJava
+    compile dataDependencies.daggerCompiler
+    compile dataDependencies.dagger
+    compile dataDependencies.retrofit
+    compile dataDependencies.gson_converter
+    compile dataDependencies.rxjava_adapter
+
+    testCompile dataTestDependencies.jUnit
+    testCompile dataTestDependencies.roboelectric
+    testCompile dataTestDependencies.kotlin
+    testCompile dataTestDependencies.kotlinTest
+    testCompile dataTestDependencies.mockitoKotlin
+    testCompile dataTestDependencies.kluent
+
+    compile fileTree(dir: 'libs', include: '*.jar')
+
+}
+
+repositories {
+    mavenCentral()
+}
