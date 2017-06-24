@@ -22,7 +22,7 @@ Then generate your new project:
 
 ```bash
 mkdir MyAwesomeAndroidApp && cd MyAwesomeAndroidApp
-yo android-clean-architecture
+yo android-kotlin-clean
 ```
 
 ## Dependencies
