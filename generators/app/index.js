@@ -122,6 +122,5 @@ module.exports = Generator.extend({
       this.fs.copyTpl(`${this.sourceRoot()}/${architecture}/${src}`, `${dest}`, this.props);
     });
 
-
   }
 });
