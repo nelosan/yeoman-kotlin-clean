@@ -1,8 +1,9 @@
 # generator-android-clean-architecture
+[![NPM version][npm-image]][npm-url]
 
-> Yeoman generator to create an android app using [android10-clean-architecture] (https://github.com/android10/Android-CleanArchitecture) with Kotlin.
+> Yeoman generator to create an android app using [android10-clean-architecture](https://github.com/android10/Android-CleanArchitecture) with Kotlin.
 
-> Based in generator of tomymolina [generator-android-clean-architecture] (https://github.com/tomymolina/generator-android-clean-architecture)
+> Based in generator of tomymolina [generator-android-clean-architecture](https://github.com/tomymolina/generator-android-clean-architecture)
   
 ## Installation
 
