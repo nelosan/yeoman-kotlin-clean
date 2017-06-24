@@ -1,4 +1,4 @@
-# generator-android-clean-architecture
+# yeoman-kotlin-clean
 
 > Yeoman generator to create an android app using [android10-clean-architecture](https://github.com/android10/Android-CleanArchitecture) with Kotlin.
 
