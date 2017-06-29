@@ -19,7 +19,7 @@ buildscript {
 
 allprojects {
     ext {
-        androidApplicationId = 'com.nelosan.clean.presentation'
+        androidApplicationId = '<%= appPackage %>.presentation'
         androidVersionCode = 1
         androidVersionName = "1.0"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
@@ -27,7 +27,7 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+clean {
     delete rootProject.buildDir
 }
 repositories {

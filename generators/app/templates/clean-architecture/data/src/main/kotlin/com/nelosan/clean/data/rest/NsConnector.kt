@@ -20,23 +20,23 @@ class NsConnector {
 
     val application: Application
     val serializer: Serializer
-    lateinit var vnAdapter: Retrofit
+    lateinit var adapter: Retrofit
 
     constructor(application: Application) {
         this.application = application
-        createApi("user", "pass", "1")
+        createApi()
         serializer = Serializer()
     }
 
-    fun createApi(user: String, pass: String, version: String) {
+    fun createApi() {
         var client: OkHttpClient = OkHttpClient
                 .Builder()
                 .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(MyInterceptor(application))
+                .addInterceptor(NsInterceptor(application))
                 .build()
 
 
-        vnAdapter = Retrofit
+        adapter = Retrofit
                 .Builder()
                 .baseUrl(ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create())
